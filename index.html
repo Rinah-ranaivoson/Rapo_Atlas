@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Custom Audio Player</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="player-container">
+      <div class="toggle-buttons">
+        <button id="audioToggle" onclick="switchMode('audio')">
+            <img src="assets/headphones.png" alt="Audio Mode" width="24" height="24">
+          </button>
+          <button id="youtubeToggle" onclick="switchMode('youtube')">
+            <img src="assets/youtube.png" alt="YouTube Mode" width="24" height="24">
+          </button>          
+      </div>
+  
+      <h2>Rapo Atlas</h2>
+  
+      <div class="playlist" id="playlist"></div>
+  
+      <iframe id="youtubePlayer" style="display: none;"></iframe>
+    </div>
+
+  
+    <!-- Inclusion de la bibliothèque Shaka Player -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.4.2/shaka-player.compiled.js"></script>
+  
+    <script>
+      let currentPlayer = null; // Instance actuelle de Shaka Player
+      let currentButton = null; // Bouton actuellement actif
+      let currentAudioElement = null; // Élément audio actuellement en lecture
+      let currentMode = 'audio';
+  
+      const audioTracks = [
+        { title: 'The Black AngeL', url: 'music/track1.m3u8' },
+        { title: 'RAPO ATLAS_IHA IGNY', url: 'music/RAPO_ATLASIHA_IGNY.m3u8' },
+        { title: 'Human Rights', url: 'music/human_rights.m3u8' }
+      ];
+  
+      const youtubeTracks = [
+        { title: 'The Black AngeL', url: 'https://youtu.be/kUXJPt5kW4c?si=n7RCihuiiKHzK4iz' },
+        { title: 'RAPO ATLAS_IHA IGNY', url: 'https://youtu.be/NBdiep5MgAg?si=nR9fuNyBmH0x1pAn' },
+        { title: 'Human Rights', url: 'https://youtu.be/YLMVo5oUe6U?si=XeEbxnepSm5l0X9K' }
+      ];
+  
+      function renderPlaylist() {
+        const playlist = document.getElementById('playlist');
+        playlist.innerHTML = '';
+
+        const tracks = currentMode === 'audio' ? audioTracks : youtubeTracks;
+
+        tracks.forEach(track => {
+            const item = document.createElement('div');
+            item.className = 'playlist-item';
+            item.innerHTML = `
+            <button class="play-button">
+                <img src="${currentMode === 'audio' ? 'assets/play.png' : 'assets/youtube.png'}" alt="Play" width="24" height="24">
+            </button>
+            <span>${track.title}</span>
+            `;
+            item.onclick = () => {
+            if (currentMode === 'audio') {
+                playTrack(track.url, item);
+            } else {
+                playYouTube(track.url);
+            }
+            };
+            playlist.appendChild(item);
+        });
+     }
+
+    async function playTrack(url, element) {
+        if (currentPlayer) {
+            fadeOutAndStop(currentAudioElement);
+            currentPlayer.unload();
+            if (currentButton) {
+            currentButton.querySelector('img').src = 'assets/play.png';
+            }
+        }
+
+        const playButton = element.querySelector('.play-button');
+        const playIcon = playButton.querySelector('img');
+
+        if (currentButton === playButton) {
+            currentPlayer = null;
+            currentButton = null;
+            fadeOutAndStop(currentAudioElement);
+            return;
+        }
+
+        const audioElement = new Audio();
+        currentPlayer = new shaka.Player(audioElement);
+        currentAudioElement = audioElement;
+        currentButton = playButton;
+
+        try {
+            await currentPlayer.load(url);
+            audioElement.volume = 1;
+            audioElement.play();
+            playIcon.src = 'assets/pause.png';
+        } catch (error) {
+            console.error('Erreur lors de la lecture de la piste', error);
+        }
+
+        audioElement.addEventListener('ended', () => {
+            playIcon.src = 'assets/play.png';
+            currentPlayer = null;
+            currentButton = null;
+            currentAudioElement = null;
+        });
+    }
+
+  
+      function fadeOutAndStop(audioElement) {
+        if (!audioElement) return;
+  
+        const fadeInterval = setInterval(() => {
+          if (audioElement.volume > 0.1) {
+            audioElement.volume -= 0.1;
+          } else {
+            clearInterval(fadeInterval);
+            audioElement.pause();
+            audioElement.currentTime = 0;
+          }
+        }, 100);
+      }
+      function playYouTube(url) {
+        // Redirige l'utilisateur vers la vidéo YouTube dans un nouvel onglet
+        window.open(url.replace('/embed/', '/watch?v='), '_blank');
+      }
+
+
+  
+      function switchMode(mode) {
+        currentMode = mode;
+        document.getElementById('youtubePlayer').style.display = 'none';
+        renderPlaylist();
+      }
+  
+      document.addEventListener('DOMContentLoaded', () => {
+        renderPlaylist();
+      });
+    </script>
+  </body>
+</html>
