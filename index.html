@@ -9,16 +9,20 @@
 <body>
     <div class="player-container">
       <div class="toggle-buttons">
-        <button id="audioToggle" onclick="switchMode('audio')">
-            <img src="assets/headphones.png" alt="Audio Mode" width="24" height="24">
-          </button>
-          <button id="youtubeToggle" onclick="switchMode('youtube')">
-            <img src="assets/youtube.png" alt="YouTube Mode" width="24" height="24">
-          </button>          
+        <div class="info">
+            <img src="assets/pdp.jpg" class="pdp" width= "150px" height="150px" >
+            <h3>Rapo Atlas</h3>
+        </div> 
+        <div>
+            <button id="audioToggle" onclick="switchMode('audio')">
+              <img src="assets/headphones.png" alt="Audio Mode" width="24" height="24">
+            </button>
+            <button id="youtubeToggle" onclick="switchMode('youtube')">
+              <img src="assets/youtube.png" alt="YouTube Mode" width="24" height="24">
+            </button>
+        </div>         
       </div>
-  
-      <h2>Rapo Atlas</h2>
-  
+      
       <div class="playlist" id="playlist"></div>
   
       <iframe id="youtubePlayer" style="display: none;"></iframe>

@@ -15,14 +15,44 @@ body {
   max-width: 400px;
   background-color: #b4b4b4;
   border-radius: 10px;
+  /* From https://css.glass */
+  background: rgba(4, 65, 70, 0.47);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4.4px);
+  -webkit-backdrop-filter: blur(4.4px);
+  border: 1px solid rgba(151, 151, 151, 0.69);
+}
+.white-mask {
+  filter: brightness(200%); /* Rend l'image plus claire */
 }
 .playlist {
   margin-top: 20px;
   padding-bottom: 10px;
 }
+.pdp {
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #585858;
+}
+.info{
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+}
+
 .toggle-buttons{
   display: flex;
-  justify-content: right;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(33, 33, 33, 0.527);
+  border-radius: 16px 16px 0px 0px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4.4px);
+  -webkit-backdrop-filter: blur(4.4px);
+  border: 1px solid rgba(151, 151, 151, 0.69);
 }
 .toggle-buttons button {
   background-color: transparent;
@@ -34,6 +64,7 @@ body {
   align-items: center;
   justify-content: center;
   transition: transform 0.2s;
+  right: 1px;
 }
 
 .toggle-buttons button img {
@@ -54,12 +85,20 @@ body {
   margin: 5px 5px;
   background-color: #494949;
   color: rgb(208, 208, 208);
+  font-weight: bold;
   border-radius: 5px;
   cursor: pointer;
   transition: background-color 0.3s;
+  /* From https://css.glass */
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(4.4px);
+  -webkit-backdrop-filter: blur(4.4px);
+  border: 1px solid rgba(151, 151, 151, 0.69);
 }
 .playlist-item:hover {
-  background-color: #969696;
+  background-color: #96969600;
 }
 .playlist-item button {
   background: none;
