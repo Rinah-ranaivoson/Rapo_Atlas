@@ -7,27 +7,102 @@
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="player-container">
-      <div class="toggle-buttons">
-        <div class="info">
-            <img src="assets/pdp.jpg" class="pdp" width= "150px" height="150px" >
-            <h3>Rapo Atlas</h3>
-        </div> 
+    <div class="front_container">
+        <div class="frontimage" id="slideshow"></div>
         <div>
-            <button id="audioToggle" onclick="switchMode('audio')">
-              <img src="assets/headphones.png" alt="Audio Mode" width="24" height="24">
-            </button>
-            <button id="youtubeToggle" onclick="switchMode('youtube')">
-              <img src="assets/youtube.png" alt="YouTube Mode" width="24" height="24">
-            </button>
-        </div>         
-      </div>
-      
-      <div class="playlist" id="playlist"></div>
-  
-      <iframe id="youtubePlayer" style="display: none;"></iframe>
+            <h2 id="group_name">GROUPE RAPO ATLAS</h2>
+            <div class="player-container">
+                <div class="toggle-buttons">
+                  <div class="info">
+                      <img src="assets/pdp.jpg" class="pdp" width= "150px" height="150px" >
+                      <h3>Rapo Atlas</h3>
+                  </div> 
+                  <div>
+                      <button id="audioToggle" onclick="switchMode('audio')">
+                        <img src="assets/headphones.png" alt="Audio Mode" width="24" height="24">
+                      </button>
+                      <button id="youtubeToggle" onclick="switchMode('youtube')">
+                        <img src="assets/youtube.png" alt="YouTube Mode" width="24" height="24">
+                      </button>
+                  </div>         
+                </div>
+                
+                <div class="playlist" id="playlist"></div>
+            
+                <iframe id="youtubePlayer" style="display: none;"></iframe>
+          
+            </div>
+        </div>
+
     </div>
 
+    <div class="content_container">
+        <div class = black_glass>
+            <p class="titre"> A propos</p>
+            <p> Créé en juillet 2016, RAPO ATLAS est un groupe de jeunes talents originaires de Madagascar, formé par Rapo Nichols Nakany Atlas (leader) et Christophe (bassiste) dans le village de Mandroseza à Antananarivo. </p> <p> Porté par leur amour pour la musique, le groupe s'est donné pour mission de sensibiliser sur des thèmes comme la protection de l’environnement, le respect de l’humain, la foi en Dieu, et l’amour universel, à travers leurs chansons. </p> <p> Avec un répertoire de 30 chansons, leur style fusionne le BEKO, musique traditionnelle du sud malgache, avec des genres modernes comme le Pop, Indie, Rock et Reggae, inscrits dans le WORLD MUSIC. </p> <p> Depuis leurs débuts, RAPO ATLAS a réalisé plusieurs performances, notamment en remportant la 3ᵉ place du concours "MUSIQUE D’AFRIQUE" en 2016, organisé par l’OIF lors du sommet de la Francophonie à Madagascar. </p>    </div>
+            
+            <h2 class="white_stroke">Membre du groupe</h2>
+            <div class="member_container">
+                <div class="member">
+                    <img src="assets/bass.jpg">
+                    <div class="namecontainer"><p class="name">Christophe</p></div>
+                </div>
+                <div class="member">
+                    <img src="assets/pdp.jpg">
+                    <div class="namecontainer"><p class="name">Atlas</p></div>
+                </div>
+                <div class="member">
+                    <img src="assets/elec.jpg">
+                    <div class="namecontainer"><p class="name">Patrick</p></div>
+                </div>
+                <div class="member">
+                    <img src="assets/batt.jpg">
+                    <div class="namecontainer"><p class="name">Fy</p></div>
+                </div>
+            </div>
+
+            <h2 class="white_stroke">Évenement récent</h2>
+            <div class="card_container">
+            <div class="card">
+                <img src="assets/nation_unie.jpg">
+                <div class="description"><p class="event">Célébration de la Journée Internationale des Droits Humains 2024. </p> <br> <p class="date">11 dec 2024</p></div>
+            </div>
+            <div class="card">
+                <img src="assets/groupe1.jpg">
+                <div class="description"><p class="event">journée porte ouverte pour l’Appui à la promotion du travail décent et de la justice sociale au Carlton Anosy.</p> <br> <p class="date">30 nov 2024</p></div>
+            </div>
+            <div class="card">
+                <img src="assets/blue.png">
+                <div class="description"><p class="event">20e anniversaire du programme YLTP au Carlton Anosy.</p> <br> <p class="date">25 nov 2024</p></div>
+            </div>
+            <div class="card">
+                <img src="assets/lofo.png">
+                <div class="description"><p class="event">Lancement officiel de Lôfo.madagasikara</p> <br> <p class="date">21 oct 2024</p></div>
+            </div>
+            <div class="card">
+                <img src="assets/mpl.png">
+                <div class="description"><p class="event"> MPL Madagascar« Regards croisés sur l’africanité de Madagascar ». </p> <br> <p class="date">1 jun 2024</p></div>
+            </div>
+            <div class="card">
+                <img src="assets/poing.jpg">
+                <div class="description"><p class="event">Journée de la consolidation de la paix des Nations Unies.</p> <br> <p class="date">19 dec 2023</p></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="fixed-buttons">
+        <a href="https://open.spotify.com/intl-fr/artist/18TAlvbPRWeLVr9JDOAgPs" target="_blank" class="round-button" >
+            <img src="assets/spotify.png">
+        </a>
+        <a href="https://wa.me/261340899974?text=Bonjour!%20Je%20souhaite%20en%20savoir%20plus." target="_blank" class="round-button" >
+            <img src="assets/whatsapp.png">
+        </a>
+        <a href="mailto:nicholssy@gmail.com?subject=Demande%20de%20contact&body=Bonjour,%20j'aimerais%20en%20savoir%20plus." 
+            class="round-button" 
+            title="Envoyez-moi un email">
+            <img src="assets/gmail.png" alt="Gmail Logo">
+        </a>
+    </div>
   
     <!-- Inclusion de la bibliothèque Shaka Player -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/shaka-player/4.4.2/shaka-player.compiled.js"></script>
@@ -147,6 +222,55 @@
       document.addEventListener('DOMContentLoaded', () => {
         renderPlaylist();
       });
+
+      const images = [
+        "assets/groupe1.jpg",
+        "assets/groupe2.jpg",
+        "assets/groupe3.jpg"
+        ]; 
+
+        let currentIndex = 0;
+        const slideshowDiv = document.getElementById("slideshow");
+
+        function changeImage() {
+        currentIndex = (currentIndex + 1) % images.length; 
+        slideshowDiv.style.backgroundImage = `url('${images[currentIndex]}')`;
+        
+        slideshowDiv.classList.add("slide");
+        setTimeout(() => slideshowDiv.classList.remove("slide"), 1000);
+        }
+
+        // Start the slideshow
+        setInterval(changeImage, 5000); // Change every 2 seconds
+
     </script>
+        <footer class="footer">
+            <div class="footer-content">
+                <div class="footer-section contact">
+                    <h3>Contact</h3>
+                    <p>Email : nicholssy@gmail.com</p>
+                    <p>Téléphone : +261 34 08 999 74</p>
+                </div>
+                <div class="footer-section social">
+                    <div class="social-icons">
+                        <a href="https://www.facebook.com/rapo.atlas" target="_blank">
+                            <img src="assets/facebook.png" alt="Facebook">
+                        </a>
+                        <a href="https://open.spotify.com/intl-fr/artist/18TAlvbPRWeLVr9JDOAgPs" target="_blank">
+                            <img src="assets/spotify.png" alt="spotify">
+                        </a>
+                        <a href="https://www.instagram.com/rapoatlas/" target="_blank">
+                            <img src="assets/instagram.png" alt="Instagram">
+                        </a>
+                        <a href="https://www.youtube.com/@raponakanynicholsatlas5757" target="_blank">
+                            <img src="assets/youtube.png" alt="youtube">
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; 2024 rapoatlas.mg | Tous droits réservés
+            </div>
+        </footer>
   </body>
 </html>
