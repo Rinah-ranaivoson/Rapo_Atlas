@@ -15,14 +15,17 @@ body {
   background-attachment: fixed;
   padding: 0;
 }
-h3{
+h4{
   margin-left: 10px;
   color: #b4b4b4;
 }
 h2{
-  margin-left: 20px;
+  margin-left: 15px;
+  margin-top: 0px;
+  margin-bottom: 0px;
+  margin-right: 0px;
   color: #414141;
-  font-size: 40px;
+  font-size: 30px;
 }
 .front_container{
   display: flex;
@@ -45,9 +48,13 @@ h2{
 .frontimage.slide::before {
   left: 0;
 }
-
+.players{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
 .player-container {
-  margin: 20px auto;
+  margin: 20px 20px;
   max-width: 400px;
   background-color: #b4b4b4;
   border-radius: 10px;
@@ -316,6 +323,8 @@ ul li::before {
   z-index: 3;
   bottom: 1px;
   right: 5px;
+  background-color: #222222ab;
+  border-radius: 10px;
 }
 .name{
   color: #ccc;
@@ -325,6 +334,7 @@ ul li::before {
 }
 .white_stroke{
   -webkit-text-stroke: #dadada 1px;
+  margin: 50px;
 }
 footer{
   background-color: #494949;

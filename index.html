@@ -9,29 +9,57 @@
 <body>
     <div class="front_container">
         <div class="frontimage" id="slideshow"></div>
-        <div>
-            <h2 id="group_name">GROUPE RAPO ATLAS</h2>
-            <div class="player-container">
-                <div class="toggle-buttons">
-                  <div class="info">
-                      <img src="assets/pdp.jpg" class="pdp" width= "150px" height="150px" >
-                      <h3>Rapo Atlas</h3>
-                  </div> 
-                  <div>
-                      <button id="audioToggle" onclick="switchMode('audio')">
-                        <img src="assets/headphones.png" alt="Audio Mode" width="24" height="24">
-                      </button>
-                      <button id="youtubeToggle" onclick="switchMode('youtube')">
-                        <img src="assets/youtube.png" alt="YouTube Mode" width="24" height="24">
-                      </button>
-                  </div>         
-                </div>
-                
-                <div class="playlist" id="playlist"></div>
-            
-                <iframe id="youtubePlayer" style="display: none;"></iframe>
-          
+        <h2 class="group_name">RAPO ATLAS</h2>
+    </div>    
+    <div class="players">
+        <div class="player-container">
+            <div class="toggle-buttons">
+                <div class="info">
+                    <img src="assets/pdp.jpg" class="pdp" width= "150px" height="150px" >
+                    <h4>Clip officiel</h4>
+                </div> 
+                <div>
+                    <button id="youtubeToggle" onclick="switchMode('youtube')">
+                    <img src="assets/youtube.png" alt="YouTube Mode" width="24" height="24">
+                    </button>
+                    <button id="audioToggle" onclick="switchMode('audio')">
+                    <img src="assets/headphones.png" alt="Audio Mode" width="24" height="24">
+                    </button>
+                </div>         
             </div>
+            
+            <div class="playlist" id="playlist"></div>
+        
+            <iframe id="youtubePlayer" style="display: none;"></iframe>
+        
+        </div>
+
+        <div class="player-container">
+            <div class="toggle-buttons">
+                <div class="info">
+                    <img src="assets/pdp.jpg" class="pdp" width= "150px" height="150px" >
+                    <h4>Consert live</h4>
+                </div>         
+            </div>
+            
+            <div class="playlist" id="live_playlist"></div>
+        
+            <iframe id="youtubePlayer" style="display: none;"></iframe>
+        
+        </div>
+
+        <div class="player-container">
+            <div class="toggle-buttons">
+                <div class="info">
+                    <img src="assets/pdp.jpg" class="pdp" width= "150px" height="150px" >
+                    <h4>Audios</h4>
+                </div>         
+            </div>
+            
+            <div class="playlist" id="cloud_playlist"></div>
+        
+            <iframe id="youtubePlayer" style="display: none;"></iframe>
+        
         </div>
 
     </div>
@@ -45,19 +73,19 @@
             <div class="member_container">
                 <div class="member">
                     <img src="assets/bass.jpg">
-                    <div class="namecontainer"><p class="name">Christophe</p></div>
+                    <div class="namecontainer"><p class="name">Christophe <br> Bassiste, Arrangeur </p></div>
                 </div>
                 <div class="member">
                     <img src="assets/pdp.jpg">
-                    <div class="namecontainer"><p class="name">Atlas</p></div>
+                    <div class="namecontainer"><p class="name">Atlas <br> Lead vocal, guitariste </p></div>
                 </div>
                 <div class="member">
                     <img src="assets/elec.jpg">
-                    <div class="namecontainer"><p class="name">Patrick</p></div>
+                    <div class="namecontainer"><p class="name">Patrick <br> Soliste, Guitariste</p></div>
                 </div>
                 <div class="member">
                     <img src="assets/batt.jpg">
-                    <div class="namecontainer"><p class="name">Fy</p></div>
+                    <div class="namecontainer"><p class="name">Fy <br> Batteur, rythmique</p></div>
                 </div>
             </div>
 
@@ -111,7 +139,7 @@
       let currentPlayer = null; // Instance actuelle de Shaka Player
       let currentButton = null; // Bouton actuellement actif
       let currentAudioElement = null; // Élément audio actuellement en lecture
-      let currentMode = 'audio';
+      let currentMode = 'youtube';
   
       const audioTracks = [
         { title: 'The Black AngeL', url: 'music/track1.m3u8' },
@@ -124,31 +152,79 @@
         { title: 'RAPO ATLAS_IHA IGNY', url: 'https://youtu.be/NBdiep5MgAg?si=nR9fuNyBmH0x1pAn' },
         { title: 'Human Rights', url: 'https://youtu.be/YLMVo5oUe6U?si=XeEbxnepSm5l0X9K' }
       ];
+
+      const liveTracks = [
+        { title: 'Live Concert Compilation', url: 'https://www.youtube.com/watch?v=iQcvRDK8EdI' },
+        { title: 'VELO (live)', url: 'https://www.youtube.com/watch?v=34yVdTF76RE' }
+        ];
+
+        const additionalAudioTracks = [
+        { title: 'NIOVA FO', url: 'https://on.soundcloud.com/j9KAV9ZA9t8LnBSRA' },
+        { title: 'Djuma', url: 'https://on.soundcloud.com/zkwLYp6yowJeEpKX9' },
+        { title: 'GASY RAIKY', url: 'https://on.soundcloud.com/L7HvDKjVibge31ET8' },
+        { title: 'RAPO ATLAS ft RAMJASY-HIRANGA .', url: 'https://on.soundcloud.com/VSPYN3CJSJHXH5dUA' }
+        ];
+
   
-      function renderPlaylist() {
-        const playlist = document.getElementById('playlist');
+      function renderPlaylist(idof) {
+        const playlist = document.getElementById(idof);
         playlist.innerHTML = '';
 
-        const tracks = currentMode === 'audio' ? audioTracks : youtubeTracks;
+        if(idof == 'playlist'){
+            const tracks = currentMode === 'audio' ? audioTracks : youtubeTracks;
 
-        tracks.forEach(track => {
-            const item = document.createElement('div');
-            item.className = 'playlist-item';
-            item.innerHTML = `
-            <button class="play-button">
-                <img src="${currentMode === 'audio' ? 'assets/play.png' : 'assets/youtube.png'}" alt="Play" width="24" height="24">
-            </button>
-            <span>${track.title}</span>
-            `;
-            item.onclick = () => {
-            if (currentMode === 'audio') {
-                playTrack(track.url, item);
-            } else {
-                playYouTube(track.url);
-            }
-            };
-            playlist.appendChild(item);
-        });
+            tracks.forEach(track => {
+                const item = document.createElement('div');
+                item.className = 'playlist-item';
+                item.innerHTML = `
+                <button class="play-button">
+                    <img src="${currentMode === 'audio' ? 'assets/play.png' : 'assets/youtube.png'}" alt="Play" width="24" height="24">
+                </button>
+                <span>${track.title}</span>
+                `;
+                item.onclick = () => {
+                if (currentMode === 'audio') {
+                    playTrack(track.url, item);
+                } else {
+                    playYouTube(track.url);
+                }
+                };
+                playlist.appendChild(item);
+            });
+        }
+        if(idof == 'live_playlist'){
+            const tracks = liveTracks;
+
+            tracks.forEach(track => {
+                const item = document.createElement('div');
+                item.className = 'playlist-item';
+                item.innerHTML = `
+                <button class="play-button">
+                    <img src="assets/youtube.png" alt="Play" width="24" height="24">
+                </button>
+                <span>${track.title}</span>
+                `;
+                item.onclick = () => openlink(track.url);
+                playlist.appendChild(item);
+            });
+        }
+        if(idof == 'cloud_playlist'){
+            const tracks = additionalAudioTracks;
+
+            tracks.forEach(track => {
+                const item = document.createElement('div');
+                item.className = 'playlist-item';
+                item.innerHTML = `
+                <button class="play-button">
+                    <img src="assets/soundcloud.png" alt="Play" width="24" height="24">
+                </button>
+                <span>${track.title}</span>
+                `;
+                item.onclick = () => openlink(track.url);
+                playlist.appendChild(item);
+            });
+        }
+
      }
 
     async function playTrack(url, element) {
@@ -210,17 +286,21 @@
         // Redirige l'utilisateur vers la vidéo YouTube dans un nouvel onglet
         window.open(url.replace('/embed/', '/watch?v='), '_blank');
       }
-
+      function openlink(url){
+        window.open(url);
+      }
 
   
       function switchMode(mode) {
         currentMode = mode;
         document.getElementById('youtubePlayer').style.display = 'none';
-        renderPlaylist();
+        renderPlaylist('playlist');
       }
   
       document.addEventListener('DOMContentLoaded', () => {
-        renderPlaylist();
+        renderPlaylist('playlist');
+        renderPlaylist('live_playlist');
+        renderPlaylist('cloud_playlist');
       });
 
       const images = [
